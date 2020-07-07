@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import PostsManager from '@/components/PostsManager'
+import ShowPost from '@/components/ShowPost'
 import Auth from '@okta/okta-vue'
 
 Vue.use(Auth, {
@@ -32,6 +33,11 @@ let router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/post/:id',
+      name: 'post',
+      component: ShowPost
     },
     {
       path: '*',

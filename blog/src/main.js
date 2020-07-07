@@ -6,7 +6,14 @@ import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import moment from 'moment'
+
+library.add(faArrowLeft)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.prototype.moment = moment
 Vue.use(BootstrapVue)

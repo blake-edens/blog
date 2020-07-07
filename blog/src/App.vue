@@ -13,7 +13,12 @@
       </b-collapse>
     </b-navbar>
     <!-- routes will be rendered here -->
-    <router-view />
+    <transition
+      name="fade"
+      mode="out-in"
+    >
+      <router-view />
+    </transition>
   </div>
 </template>
 
@@ -48,3 +53,17 @@ export default {
   }
 }
 </script>
+
+<style>
+  .fade-leave-active {
+    transition: opacity 0.5s;
+  }
+  .fade-enter-active {
+    transition: opacity 2s;
+  }
+
+  .fade-enter,
+  .fade-leave-active {
+    opacity: 0
+  }
+</style>

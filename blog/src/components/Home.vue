@@ -1,17 +1,16 @@
 <template>
   <div class="container-fluid mt-4">
-    <FullArticle v-if="articleDisplay" v-bind="selected_id"></FullArticle>
-    <div class="card previewContainer" v-if="!articleDisplay">
+    <div class="card previewContainer">
         <!-- Default card contents -->
         <h3 class="card-header text-center bg-dark text-white">
             Latest Articles
         </h3>
         <div class="card-body bg-light">
             <div class="card previewObject border-dark" v-for="post in posts" :key="post.id">
-                <div class="card-header text-white bg-primary previewHeader" v-on:click="fullView(post)">
+                <div class="card-header text-white bg-primary previewHeader" v-on:click="fullView(post.id)">
                     {{ post.title }}
                 </div>
-                <div class="card-body previewBody">
+                <div class="card-body previewBody" v-html="post.body">
                     {{ post.body }}
                 </div>
                 <div class="card-footer publishDate">
@@ -20,35 +19,19 @@
             </div>
         </div>
     </div>
-
-    <br><br><br><hr>
-    <center><h1 class="h1">Latest Articles</h1></center>
-    <br><br>
     <b-alert :show="loading" variant="info">Loading...</b-alert>
-    <div class="previewContainer2" v-for="(post, index) in posts" :key="post.id">
-        <hr v-if="index > 0">
-        <span class="h4 previewHeader">{{ post.title }}</span>
-        <span class="publishDate">published {{ formatDate(post.createdAt) }}</span>
-        <div class="previewBody">{{ post.body }}</div>
-    </div>
   </div>
 </template>
 
 <script>
 import api from '@/api'
-import FullArticle from './FullArticle.vue'
 export default {
   data () {
     return {
       loading: false,
-      articleDisplay: false,
-      selected_id: 0,
       posts: [],
       model: {}
     }
-  },
-  components: {
-    FullArticle
   },
   async created () {
     this.refreshPosts()
@@ -63,8 +46,7 @@ export default {
       return body.substring(0, 100) + ' ...'
     },
     fullView (id) {
-      this.id = id
-      this.articleDisplay = true
+      this.$router.push({ path: `post/${id}` })
     }
   }
 }
@@ -91,6 +73,12 @@ export default {
     }
     .previewHeader {
         font-size: 22px;
+        transition: background-color 0.5s;
+    }
+    .previewHeader:hover  {
+      background-color: #0057aa !important;
+      cursor: pointer;
+      transition: background-color 0.5s;
     }
     .previewBody {
         max-height: 300px;
