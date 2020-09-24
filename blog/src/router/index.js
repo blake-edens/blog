@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
-import PostsManager from '@/components/PostsManager'
-import ShowPost from '@/components/ShowPost'
+import RecentPostList from '@/components/RecentPostList'
+import Editor from '@/components/Editor'
+import Publisher from '@/components/Publisher'
 import Auth from '@okta/okta-vue'
 
 Vue.use(Auth, {
@@ -19,17 +19,17 @@ let router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home
+      name: 'RecentPostList',
+      component: RecentPostList
     },
     {
       path: '/implicit/callback',
       component: Auth.handleCallback()
     },
     {
-      path: '/posts-manager',
-      name: 'PostsManager',
-      component: PostsManager,
+      path: '/editor',
+      name: 'Editor',
+      component: Editor,
       meta: {
         requiresAuth: true
       }
@@ -37,7 +37,7 @@ let router = new Router({
     {
       path: '/post/:id',
       name: 'post',
-      component: ShowPost
+      component: Publisher
     },
     {
       path: '*',
