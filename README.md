@@ -21,7 +21,7 @@ Allows user to search and filter blog posts by title, category, date created, et
 Allows authenticated user to create blog posts with specific formatting tools. This will enforce consistency across blog posts while allowing some degree of flexibility.
 
 ### publisher.vue
-Displays blog posts according to the formatting specified, inserting ads at predetermined break points.
+Displays blog posts according to the formatting specified, inserting ads at predetermined break points if monetization is enabled.
 
 ### authenticator.vue
 Allows user to sign-in given valid credentials. Users who authenticate are given management access to their blog posts.
